@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<IconTextureAtlases>
+		<Row Name="ICON_ATLAS_AMATHERIA_OP" IconSize="22" IconsPerRow="8" IconsPerColumn="8" Filename="OP_AmatheriaResources22.dds" Baseline="6" />
+	</IconTextureAtlases>
+	<IconDefinitions>
+		<Row Name="ICON_RESOURCE_DATES_OP"             Atlas="ICON_ATLAS_AMATHERIA_OP" Index="42"/>
+		<Row Name="RESOURCE_DATES_OP"                  Atlas="ICON_ATLAS_AMATHERIA_OP" Index="42"/>
+		<Row Name="ICON_RESOURCE_SAFFRON_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="44"/>
+		<Row Name="RESOURCE_SAFFRON_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="44"/>
+		<Row Name="ICON_RESOURCE_TOMATO_OP"            Atlas="ICON_ATLAS_AMATHERIA_OP" Index="48"/>
+		<Row Name="RESOURCE_TOMATO_OP"                 Atlas="ICON_ATLAS_AMATHERIA_OP" Index="48"/>
+		<Row Name="ICON_RESOURCE_POPPIES_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="60"/>
+		<Row Name="RESOURCE_POPPIES_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="60"/>
+		<Row Name="ICON_RESOURCE_BERRIES_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="62"/>
+		<Row Name="RESOURCE_BERRIES_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="62"/>
+		<Row Name="ICON_RESOURCE_ALOE_OP"              Atlas="ICON_ATLAS_AMATHERIA_OP" Index="63"/>
+		<Row Name="RESOURCE_ALOE_OP"                   Atlas="ICON_ATLAS_AMATHERIA_OP" Index="63"/>
+
+
+		<Row Name="ICON_OP_ALPHEUS"                    Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="3" />
+		<Row Name="ICON_OP_APHRODITE"                  Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="0" />
+		<Row Name="ICON_OP_APOLLO"                     Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="5" />
+		<Row Name="ICON_OP_ARES"                       Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="18" />
+		
+		<Row Name="ICON_OP_ARTEMIS"                    Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="9" />
+		<Row Name="ICON_OP_ATHENA"		               Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="12" />
+		<Row Name="ICON_OP_ATLAS"                      Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="10" />
+		<Row Name="ICON_OP_DEMETER"                    Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="19" />
+		<Row Name="ICON_OP_DIONYSUS"                   Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="21" />
+
+		<Row Name="ICON_OP_GAIA"                       Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="26" />
+		<Row Name="ICON_OP_HADES"                      Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="11" />
+		<Row Name="ICON_OP_HELIOS"	                   Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="8" />
+		<Row Name="ICON_OP_HEPHAESTUS"                 Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="15" />
+
+		<Row Name="ICON_OP_HERA"                       Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="2" />
+		<Row Name="ICON_OP_HERMES"                     Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="13" />
+		<Row Name="ICON_OP_HESTIA"                     Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="14" />
+		<Row Name="ICON_OP_PAN"                        Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="6" />
+		<Row Name="ICON_OP_PERSEPHONE"                 Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="16" />
+		<Row Name="ICON_OP_POSEIDON"                   Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="7" />
+		<Row Name="ICON_OP_ZEUS"                       Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="4" />
+	</IconDefinitions>
+</GameData>

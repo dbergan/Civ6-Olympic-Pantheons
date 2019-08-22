@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="d713621a-16d2-4305-a132-b644929c795d" version="10">
+  <Properties>
+    <Name>DB [ICON_Faith]Olympic Pantheons[ICON_Faith]</Name>
+    <Description>REQUIRES: RISE &amp; FALL[NEWLINE][NEWLINE]The pantheon choices are all replaced with powerful geography-based beliefs with names from Greek mythology. You can opt for either a small bonus on some kind of common terrain (like rivers or forests) or a big bonus on a desolate or rare type of terrain (like deserts or mines over strategic resources).[NEWLINE][NEWLINE]I went this route to reinforce the designers' principle of making the map more relevant to your civilization. Since every civilization gets one exclusive pantheon, I wanted a dynamic where you choose your kind of turf and then get big rewards for it. And it creates a huge incentive to forcibly take over someone else's city when they aren't respecting your holy ground. Or sacred cows.</Description>
+    <Teaser>Pantheon overhaul</Teaser>
+    <Authors>DB</Authors>
+  </Properties>
+  <Dependencies>
+    <Mod id="1B28771A-C749-434B-9053-D1380C553DE9" title="Rise and Fall" />
+  </Dependencies>
+  <References>
+    <Mod id="23879c66-7cbb-4320-a891-ad24026f1b6b" title="Resourceful 2" />
+    <Mod id="5ea8c082-2010-4585-a432-24729ac48844" title="Non-geographic Pantheons moved to Religious Beliefs" />
+    <Mod id="b024f3a4-35ea-4e40-a19f-85ad75b7f332" title="Resourceful 2 Rebalanced" />
+  </References>
+  <InGameActions>
+    <UpdateDatabase id="Database">
+      <File>OP.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="Text">
+      <File>LOC_OP.sql</File>
+    </UpdateText>
+    <UpdateIcons id="Icons">
+      <File>OP_Icons.xml</File>
+    </UpdateIcons>
+    <ImportFiles id="Amatheria_Import">
+      <File>OP_AmatheriaResources22.dds</File>
+    </ImportFiles>
+  </InGameActions>
+  <Files>
+    <File>LOC_OP.sql</File>
+    <File>OP.sql</File>
+    <File>OP_AmatheriaResources22.dds</File>
+    <File>OP_Icons.xml</File>
+  </Files>
+</Mod>
