@@ -7,7 +7,7 @@ GitHub is a great free resource for a team of people to work together on a progr
 2) Click the Green "Clone or Download" button
 3) Download ZIP
 4) Extract the zip into a folder
-5) There should be two folders in there (Data and Text), Copy/Paste these folders into your Olympic Pantheons folder and overwrite the existing files
+5) Move the files into your Olympic Pantheons folder such that they overwrite the existing files with the same names
 
 My Olympic Pantheons folder is here:
 C:\SteamLibrary\steamapps\workshop\content\289070\1540083970
@@ -21,7 +21,7 @@ https://github.com/join
 
 2) Once it's created and you've logged in, go here: https://github.com/dbergan/Civ6-Olympic-Pantheons
 
-3) Find the file where the change is to be made, for example, click on LOC_OP.sql
+3) Find the file where the change is to be made. For example, click on LOC_OP.sql
 
 4) Click the pencil icon on the top-left part of the code, now the code section will become editable
 
@@ -29,7 +29,7 @@ https://github.com/join
 
 6) Here you fill out a title and extended description of what you did, then press the green "Propose file change" button
 
-7) On the next page click the green "Create pull request" button
+7) On the next page click the green "Create pull request" button. This means that you want the master codepage to "pull" your changes into it.
 
 That's it! We automatically get a notification of the pull request and will merge it in at our convenience. If we have any questions, we'll let you know.
 
@@ -45,9 +45,9 @@ https://github.com/join
 
 4) Now you can edit any of the files that you want. Whatever you edit does not change the master codepage, just your own personal Fork. You edit files by clicking, for example, LOC_OP.sql to bring up the file you want. And then click the pencil icon (top-right of the code section) to make the code section editable. When you're done editing, fill out the description title at the bottom of the code section and click the green "Commit changes".
 
-5) Keep doing this until you've edited all the files that you need to. At any point in the process you can test your edits by clicking the "<> Code" tab and following the instructions from Step 2 onward in the question above about getting the latest files.
+5) Keep doing this until you've edited all the files that you need to. At any point in the process you can test your edits by clicking the "<> Code" tab and following the instructions from Step 2 onward in the first section above about getting the latest files.
 
-6) Once you're sure that you have all the changes you want to make, you create a "Pull Request"... this means that you want the master codepage to "pull" your changes into it. To do this, you click the "<> Code" tab and then click the button on the left side next to Branch: master that says "New pull request".
+6) Once you're sure that you have all the changes you want to make, create a "Pull Request". This means that you want the master codepage to "pull" your changes into it. To do this, you click the "<> Code" tab and then click the button on the left side next to Branch: master that says "New pull request".
 
 7) On this next page, it should show all the differences between your Fork and the master codepage. If it looks good, click the green "Create pull request" button, then write a description of your changes, and again the green "Create pull request" button.
 
