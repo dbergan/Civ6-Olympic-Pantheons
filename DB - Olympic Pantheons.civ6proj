@@ -5,7 +5,7 @@
     <Name>DB [ICON_Faith]Olympic Pantheons[ICON_Faith]</Name>
     <Guid>d713621a-16d2-4305-a132-b644929c795d</Guid>
     <ProjectGuid>637c0f41-eebf-4143-b302-4a7464a62f0f</ProjectGuid>
-    <ModVersion>23</ModVersion>
+    <ModVersion>24</ModVersion>
     <Teaser>Pantheon overhaul</Teaser>
     <Description>REQUIRES: RISE &amp; FALL[NEWLINE][NEWLINE]The pantheon choices are all replaced with powerful geography-based beliefs with names from Greek mythology. You can opt for either a small bonus on some kind of common terrain (like rivers or forests) or a big bonus on a desolate or rare type of terrain (like deserts or mines over strategic resources).[NEWLINE][NEWLINE]I went this route to reinforce the designers' principle of making the map more relevant to your civilization. Since every civilization gets one exclusive pantheon, I wanted a dynamic where you choose your kind of turf and then get big rewards for it. And it creates a huge incentive to forcibly take over someone else's city when they aren't respecting your holy ground. Or sacred cows.</Description>
     <Authors>DB</Authors>

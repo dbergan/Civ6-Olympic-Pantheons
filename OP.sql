@@ -903,7 +903,7 @@ INSERT INTO Beliefs (BeliefType, Name, Description, BeliefClassType) VALUES ('OP
 INSERT INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_PERSEPHONE_YIELD_FOOD', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'DB_REQSET_IS_ANY_ARCTIC') ;
 INSERT INTO ModifierArguments (ModifierId, Name, Value) VALUES
 							  ('OP_PERSEPHONE_YIELD_FOOD', 'YieldType', 'YIELD_FOOD'),
-							  ('OP_PERSEPHONE_YIELD_FOOD', 'Amount', 2) ;
+							  ('OP_PERSEPHONE_YIELD_FOOD', 'Amount', 1) ;
 INSERT INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_PERSEPHONE_CITY_ADDS_MODIFIER_FOOD', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'CITY_FOLLOWS_PANTHEON_REQUIREMENTS') ;
 INSERT INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_PERSEPHONE_CITY_ADDS_MODIFIER_FOOD', 'ModifierId', 'OP_PERSEPHONE_YIELD_FOOD') ;
 INSERT INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_PERSEPHONE', 'OP_PERSEPHONE_CITY_ADDS_MODIFIER_FOOD') ;
@@ -947,7 +947,7 @@ INSERT INTO ModifierArguments(ModifierId, Name, Value) VALUES
 							 ('OP_PERSEPHONE_SNOW_HOLY_SITE_ADJACENCY', 'TerrainType', 'TERRAIN_SNOW'),
 							 ('OP_PERSEPHONE_SNOW_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
                              ('OP_PERSEPHONE_SNOW_HOLY_SITE_ADJACENCY', 'Amount', 1) ;
---    Standard Holy Site Adjacency  //  2 FAITH for adjacent SNOW_HILLS
+--    Standard Holy Site Adjacency  //  1 FAITH for adjacent SNOW_HILLS
 INSERT INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_PERSEPHONE', 'OP_PERSEPHONE_SNOW_HILLS_HOLY_SITE_ADJACENCY') ;
 INSERT INTO Modifiers(ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
