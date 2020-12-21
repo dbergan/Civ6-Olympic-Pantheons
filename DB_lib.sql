@@ -10,7 +10,11 @@ INSERT OR IGNORE INTO Tags
 (Tag,							Vocabulary) 
 VALUES 
 ('DB_CLASS_ALL',					'ABILITY_CLASS'),
+('DB_CLASS_ALL_COMBAT',				'ABILITY_CLASS'),
+('DB_CLASS_LAND_ALL',				'ABILITY_CLASS'),
 ('DB_CLASS_LAND_COMBAT',			'ABILITY_CLASS'),
+('DB_CLASS_LAND_CAVALRY',			'ABILITY_CLASS'),
+('DB_CLASS_LAND_NON_CAVALRY',		'ABILITY_CLASS'),
 ('DB_CLASS_NAVAL_COMBAT',			'ABILITY_CLASS'),
 ('DB_CLASS_AIR_COMBAT',				'ABILITY_CLASS'),
 ('DB_CLASS_LAND_MELEE_ATTACKER',	'ABILITY_CLASS'),
@@ -21,16 +25,20 @@ VALUES
 ('DB_CLASS_NAVAL_BOMBARD_ATTACKER', 'ABILITY_CLASS')
 ;
 INSERT OR IGNORE INTO Tags (Tag, Vocabulary) 
-  SELECT 'DB_CLASS_' || SUBSTR(UnitType, 6), 'ABILITY_CLASS' FROM Units ;
+  SELECT 'DB_CLASS_' || UnitType, 'ABILITY_CLASS' FROM Units ;
 
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_ALL' FROM Units ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
-  SELECT UnitType, 'DB_CLASS_LAND_COMBAT' FROM Units WHERE FormationClass = 'FORMATION_CLASS_LAND_COMBAT' ;
+  SELECT UnitType, 'DB_CLASS_ALL_COMBAT' FROM Units WHERE (Combat > 0 OR RangedCombat > 0 OR Bombard > 0) AND (FormationClass = 'FORMATION_CLASS_LAND_COMBAT' OR FormationClass = 'FORMATION_CLASS_NAVAL' OR FormationClass = 'FORMATION_CLASS_AIR') ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
-  SELECT UnitType, 'DB_CLASS_NAVAL_COMBAT' FROM Units WHERE FormationClass = 'FORMATION_CLASS_NAVAL' ;
+  SELECT UnitType, 'DB_CLASS_LAND_ALL' FROM Units WHERE Domain = 'DOMAIN_LAND' ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
-  SELECT UnitType, 'DB_CLASS_AIR_COMBAT' FROM Units WHERE FormationClass = 'FORMATION_CLASS_AIR' ;
+  SELECT UnitType, 'DB_CLASS_LAND_COMBAT' FROM Units WHERE (Combat > 0 OR RangedCombat > 0 OR Bombard > 0) AND FormationClass = 'FORMATION_CLASS_LAND_COMBAT' ;
+INSERT OR IGNORE INTO TypeTags (Type, Tag)
+  SELECT UnitType, 'DB_CLASS_NAVAL_COMBAT' FROM Units WHERE (Combat > 0 OR RangedCombat > 0 OR Bombard > 0) AND FormationClass = 'FORMATION_CLASS_NAVAL' ;
+INSERT OR IGNORE INTO TypeTags (Type, Tag)
+  SELECT UnitType, 'DB_CLASS_AIR_COMBAT' FROM Units WHERE (Combat > 0 OR RangedCombat > 0 OR Bombard > 0) AND FormationClass = 'FORMATION_CLASS_AIR' ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_LAND_MELEE_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_LAND_COMBAT' AND Combat > 0 AND RangedCombat = 0 AND Bombard = 0 ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
@@ -38,13 +46,19 @@ INSERT OR IGNORE INTO TypeTags (Type, Tag)
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_LAND_BOMBARD_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_LAND_COMBAT' AND Bombard > 0 ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
+  SELECT UnitType, 'DB_CLASS_LAND_CAVALRY' FROM Units WHERE FormationClass = 'FORMATION_CLASS_LAND_COMBAT' AND PromotionClass LIKE '%CAVALRY%' AND PromotionClass NOT LIKE '%ANTI_CAVALRY%' ;
+INSERT OR IGNORE INTO TypeTags (Type, Tag)
+  SELECT UnitType, 'DB_CLASS_LAND_NON_CAVALRY' FROM Units WHERE FormationClass = 'FORMATION_CLASS_LAND_COMBAT' AND (PromotionClass LIKE '%ANTI_CAVALRY%' OR PromotionClass NOT LIKE '%CAVALRY%') ;
+INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_NAVAL_MELEE_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_NAVAL' AND Combat > 0 AND RangedCombat = 0 AND Bombard = 0 ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_NAVAL_RANGED_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_NAVAL' AND RangedCombat > 0 ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
   SELECT UnitType, 'DB_CLASS_NAVAL_BOMBARD_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_NAVAL' AND Bombard > 0 ;
 INSERT OR IGNORE INTO TypeTags (Type, Tag)
-  SELECT UnitType, 'DB_CLASS_' || SUBSTR(UnitType, 6) FROM Units ;
+  SELECT UnitType, 'DB_CLASS_NAVAL_BOMBARD_ATTACKER' FROM Units WHERE FormationClass = 'FORMATION_CLASS_NAVAL' AND Bombard > 0 ;
+INSERT OR IGNORE INTO TypeTags (Type, Tag)
+  SELECT UnitType, 'DB_CLASS_' || UnitType FROM Units ;
 
 
 
@@ -678,21 +692,21 @@ INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementI
 
 
 -- Attacking and Defending
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,			RequirementType,					Inverse) 
 VALUES
 ('DB_REQ_ATTACKING',	'REQUIREMENT_PLAYER_IS_ATTACKING',	0),
 ('DB_REQ_DEFENDING',	'REQUIREMENT_PLAYER_IS_ATTACKING',	1)
 ;
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,		RequirementSetType)
 VALUES
 ('DB_REQSET_ATTACKING',	'REQUIREMENTSET_TEST_ALL'),
 ('DB_REQSET_DEFENDING',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,		RequirementId)
 VALUES
 ('DB_REQSET_ATTACKING',	'DB_REQ_ATTACKING'),
@@ -700,21 +714,21 @@ VALUES
 ;
 
 -- Combat Type is ranged, melee
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,			RequirementType,					Inverse) 
 VALUES
 ('DB_REQ_MELEE_COMBAT',		'REQUIREMENT_COMBAT_TYPE_MATCHES',	0),
 ('DB_REQ_RANGED_COMBAT',	'REQUIREMENT_COMBAT_TYPE_MATCHES',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementArguments
+INSERT OR IGNORE INTO RequirementArguments
 (RequirementId,				Name,				Value)
 VALUES
 ('DB_REQ_MELEE_COMBAT',		'CombatType',		'COMBAT_MELEE'),
 ('DB_REQ_RANGED_COMBAT',	'CombatType',		'COMBAT_RANGED')
 ;
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,				RequirementSetType)
 VALUES
 ('DB_REQSET_MELEE_COMBAT',		'REQUIREMENTSET_TEST_ALL'),
@@ -725,7 +739,7 @@ VALUES
 ('DB_REQSET_DEFENDING_RANGED',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,		RequirementId)
 VALUES
 ('DB_REQSET_MELEE_COMBAT',		'DB_REQ_MELEE_COMBAT'),
@@ -743,7 +757,7 @@ VALUES
 
 
 -- Opponent unit is Land, Sea, Air, City, damaged, etc.
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,									RequirementType,							Inverse) 
 VALUES
 ('DB_REQ_OPPONENT_IS_LAND_UNIT',				'REQUIREMENT_OPPONENT_UNIT_DOMAIN_MATCHES',	0),
@@ -769,7 +783,7 @@ VALUES
 ('DB_REQ_OPPONENT_IS_NAVAL_BOMBARD_ATTACKER',	'REQUIREMENT_OPPONENT_UNIT_TAG_MATCHES',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementArguments
+INSERT OR IGNORE INTO RequirementArguments
 (RequirementId,									Name,				Value)
 VALUES
 ('DB_REQ_OPPONENT_IS_LAND_UNIT',				'UnitDomain',		'DOMAIN_LAND'),
@@ -792,7 +806,7 @@ VALUES
 ;
 
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,									RequirementSetType)
 VALUES
 ('DB_REQSET_OPPONENT_IS_LAND_UNIT',					'REQUIREMENTSET_TEST_ALL'),
@@ -818,7 +832,7 @@ VALUES
 ('DB_REQSET_OPPONENT_IS_NAVAL_BOMBARD_ATTACKER',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,									RequirementId)
 VALUES
 ('DB_REQSET_OPPONENT_IS_LAND_UNIT',					'DB_REQ_OPPONENT_IS_LAND_UNIT'),
@@ -845,7 +859,7 @@ VALUES
 ;
 
 -- Attacking/defending the different opponent types
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,								RequirementSetType)
 VALUES
 ('DB_REQSET_ATTACKING_LAND_UNIT',				'REQUIREMENTSET_TEST_ALL'),
@@ -901,7 +915,7 @@ VALUES
 ('DB_REQSET_RANGED_DEFENDING_NAVAL',			'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,								RequirementId)
 VALUES
 ('DB_REQSET_ATTACKING_LAND_UNIT',				'DB_REQ_OPPONENT_IS_LAND_UNIT'),
@@ -1014,26 +1028,26 @@ VALUES
 
 
 -- Adjacent unit is at war (e.g. for putting modifiers on the enemy, like Varu decrementing the enemy CS)
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,					RequirementType,								Inverse) 
 VALUES
 ('DB_REQ_ADJACENT_UNIT_AT_WAR',	'REQUIREMENT_PLOT_ADJACENT_TO_OWNER_AT_WAR',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementArguments
+INSERT OR IGNORE INTO RequirementArguments
 (RequirementId,					Name,				Value)
 VALUES
 ('DB_REQ_ADJACENT_UNIT_AT_WAR',	'MinDistance',		0),
 ('DB_REQ_ADJACENT_UNIT_AT_WAR',	'MaxDistance',		1)
 ;
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,					RequirementSetType)
 VALUES
 ('DB_REQSET_ADJACENT_UNIT_AT_WAR',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,					RequirementId)
 VALUES
 ('DB_REQSET_ADJACENT_UNIT_AT_WAR',	'DB_REQ_ADJACENT_UNIT_AT_WAR')
@@ -1041,7 +1055,7 @@ VALUES
 
 
 -- Modifier applies when same tile/adjacent to owner (e.g. promoted unit)
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,									RequirementType,						Inverse) 
 VALUES
 ('DB_REQ_SAME_TILE_AS_OWNER',					'REQUIREMENT_PLOT_ADJACENT_TO_OWNER',	0),
@@ -1049,7 +1063,7 @@ VALUES
 ('DB_REQ_ADJACENT_TO_OR_SAME_TILE_AS_OWNER',	'REQUIREMENT_PLOT_ADJACENT_TO_OWNER',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementArguments
+INSERT OR IGNORE INTO RequirementArguments
 (RequirementId,									Name,			Value)
 VALUES
 ('DB_REQ_SAME_TILE_AS_OWNER',					'MaxDistance',	0),
@@ -1060,7 +1074,7 @@ VALUES
 ('DB_REQ_ADJACENT_TO_OR_SAME_TILE_AS_OWNER',	'MinDistance',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,								RequirementSetType)
 VALUES
 ('DB_REQSET_SAME_TILE_AS_OWNER',				'REQUIREMENTSET_TEST_ALL'),
@@ -1068,7 +1082,7 @@ VALUES
 ('DB_REQSET_ADJACENT_TO_OR_SAME_TILE_AS_OWNER',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,								RequirementId)
 VALUES
 ('DB_REQSET_SAME_TILE_AS_OWNER',				'DB_REQ_SAME_TILE_AS_OWNER'),
@@ -1079,7 +1093,7 @@ VALUES
 
 
 -- Modifier applies to me when adjacent friendly unit matches tag (e.g. increasing range with obs balloon)
-INSERT OR REPLACE INTO Requirements
+INSERT OR IGNORE INTO Requirements
 (RequirementId,									RequirementType,										Inverse) 
 VALUES
 ('DB_REQ_ADJACENT_UNIT_LAND_COMBAT',			'REQUIREMENT_PLOT_ADJACENT_FRIENDLY_UNIT_TAG_MATCHES',	0),
@@ -1093,7 +1107,7 @@ VALUES
 ('DB_REQ_ADJACENT_UNIT_NAVAL_BOMBARD_ATTACKER',	'REQUIREMENT_PLOT_ADJACENT_FRIENDLY_UNIT_TAG_MATCHES',	0)
 ;
 
-INSERT OR REPLACE INTO RequirementArguments
+INSERT OR IGNORE INTO RequirementArguments
 (RequirementId,									Name,	Value)
 VALUES
 ('DB_REQ_ADJACENT_UNIT_LAND_COMBAT',			'Tag',	'DB_CLASS_LAND_COMBAT'),
@@ -1107,7 +1121,7 @@ VALUES
 ('DB_REQ_ADJACENT_UNIT_NAVAL_BOMBARD_ATTACKER',	'Tag',	'DB_CLASS_NAVAL_BOMBARD_ATTACKER')
 ;
 
-INSERT OR REPLACE INTO RequirementSets
+INSERT OR IGNORE INTO RequirementSets
 (RequirementSetId,									RequirementSetType)
 VALUES
 ('DB_REQSET_ADJACENT_UNIT_LAND_COMBAT',				'REQUIREMENTSET_TEST_ALL'),
@@ -1121,7 +1135,7 @@ VALUES
 ('DB_REQSET_ADJACENT_UNIT_NAVAL_BOMBARD_ATTACKER',	'REQUIREMENTSET_TEST_ALL')
 ;
 
-INSERT OR REPLACE INTO RequirementSetRequirements
+INSERT OR IGNORE INTO RequirementSetRequirements
 (RequirementSetId,									RequirementId)
 VALUES
 ('DB_REQSET_ADJACENT_UNIT_LAND_COMBAT',				'DB_REQ_ADJACENT_UNIT_LAND_COMBAT'),
@@ -1373,7 +1387,9 @@ INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('DB_DM_PLOT_ADJUST_POLICY_AMENI
 INSERT OR IGNORE INTO DynamicModifiers (ModifierType, CollectionType, EffectType) VALUES ('DB_DM_PLOT_ADJUST_POLICY_AMENITY', 'COLLECTION_CITY_PLOT_YIELDS', 'EFFECT_ADJUST_POLICY_AMENITY') ;
 
 
--- UNITS
+-----------------------------------------------
+-- Units
+-----------------------------------------------
 
 -- Grant promotion to units trained in this city (that follows this religion)
 --    UNITS (PromotionType)
@@ -1384,6 +1400,7 @@ INSERT OR IGNORE INTO DynamicModifiers (ModifierType, CollectionType, EffectType
 --    UNITS (Amount)
 INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('DB_DM_DAMAGE_TO_UNIT', 'KIND_MODIFIER') ;
 INSERT OR IGNORE INTO DynamicModifiers (ModifierType, CollectionType, EffectType) VALUES ('DB_DM_DAMAGE_TO_UNIT', 'COLLECTION_OWNER', 'EFFECT_ADJUST_UNIT_DAMAGE') ;
+
 
 -----------------------------------------------
 -- Player
