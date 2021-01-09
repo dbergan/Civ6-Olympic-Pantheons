@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GameData>
-	<IconTextureAtlases>
-		<Row Name="ICON_ATLAS_AMATHERIA_OP" IconSize="22" IconsPerRow="8" IconsPerColumn="8" Filename="OP_AmatheriaResources22.dds" Baseline="6" />
-	</IconTextureAtlases>
 	<IconDefinitions>
-		<Row Name="ICON_RESOURCE_DATES_OP"             Atlas="ICON_ATLAS_AMATHERIA_OP" Index="42"/>
-		<Row Name="RESOURCE_DATES_OP"                  Atlas="ICON_ATLAS_AMATHERIA_OP" Index="42"/>
-		<Row Name="ICON_RESOURCE_SAFFRON_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="44"/>
-		<Row Name="RESOURCE_SAFFRON_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="44"/>
-		<Row Name="ICON_RESOURCE_TOMATO_OP"            Atlas="ICON_ATLAS_AMATHERIA_OP" Index="48"/>
-		<Row Name="RESOURCE_TOMATO_OP"                 Atlas="ICON_ATLAS_AMATHERIA_OP" Index="48"/>
-		<Row Name="ICON_RESOURCE_POPPIES_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="60"/>
-		<Row Name="RESOURCE_POPPIES_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="60"/>
-		<Row Name="ICON_RESOURCE_BERRIES_OP"           Atlas="ICON_ATLAS_AMATHERIA_OP" Index="62"/>
-		<Row Name="RESOURCE_BERRIES_OP"                Atlas="ICON_ATLAS_AMATHERIA_OP" Index="62"/>
-		<Row Name="ICON_RESOURCE_ALOE_OP"              Atlas="ICON_ATLAS_AMATHERIA_OP" Index="63"/>
-		<Row Name="RESOURCE_ALOE_OP"                   Atlas="ICON_ATLAS_AMATHERIA_OP" Index="63"/>
-
-
 		<Row Name="ICON_OP_ALPHEUS"                    Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="3" />
 		<Row Name="ICON_OP_APHRODITE"                  Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="0" />
 		<Row Name="ICON_OP_APOLLO"                     Atlas="ICON_ATLAS_BELIEFS_PATHEON" Index="5" />

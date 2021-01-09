@@ -626,3 +626,17 @@ INSERT INTO ModifierArguments(ModifierId, Name, Value) VALUES
 							 ('OP_ZEUS_SNOW_MOUNTAIN_WATER_ENTERTAINMENT_COMPLEX_ADJACENCY', 'TerrainType', 'TERRAIN_SNOW_MOUNTAIN'),
 							 ('OP_ZEUS_SNOW_MOUNTAIN_WATER_ENTERTAINMENT_COMPLEX_ADJACENCY', 'YieldType', 'YIELD_SCIENCE'),
                              ('OP_ZEUS_SNOW_MOUNTAIN_WATER_ENTERTAINMENT_COMPLEX_ADJACENCY', 'Amount', 1) ;
+
+-- 5 FAITH on Statue of Zeus
+INSERT INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
+                            ('OP_ZEUS', 'OP_ZEUS_CITY_APPLIES_MODIFIER_FAITH_ON_STATUE_OF_ZEUS') ;
+INSERT INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
+                      ('OP_ZEUS_CITY_APPLIES_MODIFIER_FAITH_ON_STATUE_OF_ZEUS', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'CITY_FOLLOWS_PANTHEON_REQUIREMENTS') ;
+INSERT INTO ModifierArguments (ModifierId, Name, Value) VALUES 
+                              ('OP_ZEUS_CITY_APPLIES_MODIFIER_FAITH_ON_STATUE_OF_ZEUS', 'ModifierId', 'OP_ZEUS_FAITH_INCREASES_ON_STATUE_OF_ZEUS') ;
+INSERT INTO Modifiers (ModifierId, ModifierType) VALUES 
+                      ('OP_ZEUS_FAITH_INCREASES_ON_STATUE_OF_ZEUS', 'MODIFIER_BUILDING_YIELD_CHANGE') ;
+INSERT INTO ModifierArguments (ModifierId, Name, Value) VALUES 
+                              ('OP_ZEUS_FAITH_INCREASES_ON_STATUE_OF_ZEUS', 'BuildingType', 'BUILDING_STATUE_OF_ZEUS'),
+                              ('OP_ZEUS_FAITH_INCREASES_ON_STATUE_OF_ZEUS', 'YieldType', 'YIELD_FAITH'),
+							  ('OP_ZEUS_FAITH_INCREASES_ON_STATUE_OF_ZEUS', 'Amount', 5) ;
