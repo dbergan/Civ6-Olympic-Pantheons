@@ -137,72 +137,62 @@ INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
 -- ------------------------------------
 --  Ares
 -- ------------------------------------
+
 INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('OP_ARES', 'KIND_BELIEF') ;
 INSERT OR IGNORE INTO Beliefs (BeliefType, Name, Description, BeliefClassType) VALUES ('OP_ARES', 'LOC_OP_ARES', 'LOC_OP_ARES_DESCRIPTION', 'BELIEF_CLASS_PANTHEON') ;
 
--- here vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
-                            ('OP_ARES', 'OP_ARES_NO_WAR_WEARINESS') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES 
-                      ('OP_ARES_NO_WAR_WEARINESS', 'MODIFIER_PLAYER_ADJUST_WAR_WEARINESS') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_NO_WAR_WEARINESS', 'Amount', -100),
-							  ('OP_ARES_NO_WAR_WEARINESS', 'Overall', true) ;
+INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('OP_ABILITY_ARES_FOREIGN_STRENGTH', 'KIND_ABILITY') ; 
+INSERT OR IGNORE INTO TypeTags (Type, Tag) VALUES ('OP_ABILITY_ARES_FOREIGN_STRENGTH', 'DB_CLASS_LAND_COMBAT') ; 
+INSERT OR IGNORE INTO UnitAbilities (UnitAbilityType, Name, Description, Inactive) VALUES ('OP_ABILITY_ARES_FOREIGN_STRENGTH', 'LOC_OP_ABILITY_ARES_FOREIGN_STRENGTH_NAME', 'LOC_OP_ABILITY_ARES_FOREIGN_STRENGTH_DESCRIPTION', 1) ;
+
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_ARES', 'OP_ARES_FOREIGN_STRENGTH_PLAYERS_ATTACH_MODIFIER') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FOREIGN_STRENGTH_PLAYERS_ATTACH_MODIFIER', 'MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER', 'PLAYER_HAS_PANTHEON_REQUIREMENTS') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FOREIGN_STRENGTH_PLAYERS_ATTACH_MODIFIER', 'ModifierId', 'OP_ARES_FOREIGN_STRENGTH_GRANT_ABILITY_TO_UNITS') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES ('OP_ARES_FOREIGN_STRENGTH_GRANT_ABILITY_TO_UNITS', 'MODIFIER_PLAYER_UNITS_GRANT_ABILITY') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FOREIGN_STRENGTH_GRANT_ABILITY_TO_UNITS', 'AbilityType', 'OP_ABILITY_ARES_FOREIGN_STRENGTH') ;
+
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, ProgressWeight) VALUES ('OP_REQ_UNIT_HAS_ARES_FOREIGN_STRENGTH', 'REQUIREMENT_UNIT_HAS_ABILITY', 1) ;
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES ('OP_REQ_UNIT_HAS_ARES_FOREIGN_STRENGTH', 'UnitAbilityType', 'OP_ABILITY_ARES_FOREIGN_STRENGTH') ;
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType) VALUES ('OP_REQSET_UNIT_HAS_ARES_FOREIGN_STRENGTH', 'REQUIREMENTSET_TEST_ALL') ;
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES ('OP_REQSET_UNIT_HAS_ARES_FOREIGN_STRENGTH', 'OP_REQ_UNIT_HAS_ARES_FOREIGN_STRENGTH') ;
+
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_ARES', 'OP_ARES_FOREIGN_STRENGTH_UNIT_APPLIES_MODIFIER') ; 
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FOREIGN_STRENGTH_UNIT_APPLIES_MODIFIER', 'MODIFIER_ALL_UNITS_ATTACH_MODIFIER', 'OP_REQSET_UNIT_HAS_ARES_FOREIGN_STRENGTH') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FOREIGN_STRENGTH_UNIT_APPLIES_MODIFIER', 'ModifierId', 'OP_ARES_FOREIGN_STRENGTH_COMBAT') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FOREIGN_STRENGTH_COMBAT', 'MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH', 'DB_REQSET_ATTACKING_INSIDE_FOREIGN_TERRITORY') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FOREIGN_STRENGTH_COMBAT', 'Amount', 6) ;
+INSERT OR IGNORE INTO ModifierStrings (ModifierId, Context, Text) VALUES ('OP_ARES_FOREIGN_STRENGTH_COMBAT', 'Preview', 'LOC_OP_ARES_FOREIGN_STRENGTH_COMBAT_DESCRIPTION') ;
 
 
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
-                            ('OP_ARES', 'OP_ARES_ON_FOREIGN_KILL') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
-                      ('OP_ARES_ON_FOREIGN_KILL', 'MODIFIER_PLAYER_UNITS_ADJUST_POST_COMBAT_YIELD', TODO_IN_FOREIGN_TERR) ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'PercentDefeatedStrength', 100),
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'YieldType', 'YIELD_FAITH') ;
+
+INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('OP_ABILITY_ARES_FAITH_ON_KILL', 'KIND_ABILITY') ; 
+INSERT OR IGNORE INTO TypeTags (Type, Tag) VALUES ('OP_ABILITY_ARES_FAITH_ON_KILL', 'DB_CLASS_LAND_COMBAT') ; 
+INSERT OR IGNORE INTO UnitAbilities (UnitAbilityType, Name, Description, Inactive) VALUES ('OP_ABILITY_ARES_FAITH_ON_KILL', 'LOC_OP_ABILITY_ARES_FAITH_ON_KILL_NAME', 'LOC_OP_ABILITY_ARES_FAITH_ON_KILL_DESCRIPTION', 1) ;
+
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_ARES', 'OP_ARES_FAITH_ON_KILL_PLAYERS_ATTACH_MODIFIER') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FAITH_ON_KILL_PLAYERS_ATTACH_MODIFIER', 'MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER', 'PLAYER_HAS_PANTHEON_REQUIREMENTS') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FAITH_ON_KILL_PLAYERS_ATTACH_MODIFIER', 'ModifierId', 'OP_ARES_FAITH_ON_KILL_GRANT_ABILITY_TO_UNITS') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES ('OP_ARES_FAITH_ON_KILL_GRANT_ABILITY_TO_UNITS', 'MODIFIER_PLAYER_UNITS_GRANT_ABILITY') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FAITH_ON_KILL_GRANT_ABILITY_TO_UNITS', 'AbilityType', 'OP_ABILITY_ARES_FAITH_ON_KILL') ;
+
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, ProgressWeight) VALUES ('OP_REQ_UNIT_HAS_ARES_FAITH_ON_KILL', 'REQUIREMENT_UNIT_HAS_ABILITY', 1) ;
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value) VALUES ('OP_REQ_UNIT_HAS_ARES_FAITH_ON_KILL', 'UnitAbilityType', 'OP_ABILITY_ARES_FAITH_ON_KILL') ;
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType) VALUES ('OP_REQSET_UNIT_HAS_ARES_FAITH_ON_KILL', 'REQUIREMENTSET_TEST_ALL') ;
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES ('OP_REQSET_UNIT_HAS_ARES_FAITH_ON_KILL', 'OP_REQ_UNIT_HAS_ARES_FAITH_ON_KILL') ;
+
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_ARES', 'OP_ARES_FAITH_ON_KILL_UNIT_APPLIES_MODIFIER') ; 
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FAITH_ON_KILL_UNIT_APPLIES_MODIFIER', 'MODIFIER_ALL_UNITS_ATTACH_MODIFIER', 'OP_REQSET_UNIT_HAS_ARES_FAITH_ON_KILL') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FAITH_ON_KILL_UNIT_APPLIES_MODIFIER', 'ModifierId', 'OP_ARES_FAITH_ON_KILL_COMBAT') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES ('OP_ARES_FAITH_ON_KILL_COMBAT', 'MODIFIER_UNIT_ADJUST_POST_COMBAT_YIELD', 'DB_REQSET_INSIDE_FOREIGN_TERRITORY') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_FAITH_ON_KILL_COMBAT', 'PercentDefeatedStrength', 100),
+																		 ('OP_ARES_FAITH_ON_KILL_COMBAT', 'YieldType', 'YIELD_FAITH') ;
 
 
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
-                            ('OP_ARES', 'OP_FOREIGN_ATTACK_STR') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES 
-                      ('OP_FOREIGN_ATTACK_STR', 'MODIFIER_PLAYER_CAPTURED_CITY_ATTACH_MODIFIER') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_FOREIGN_ATTACK_STR', 'ModifierId', 'OP_ARES_FAITH_FROM_CAPTURE') ;
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES ('OP_ARES', 'OP_ARES_NO_WAR_WEARINESS') ;
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES ('OP_ARES_NO_WAR_WEARINESS', 'MODIFIER_PLAYER_ADJUST_WAR_WEARINESS') ;
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES ('OP_ARES_NO_WAR_WEARINESS', 'Amount', -100),
+																		 ('OP_ARES_NO_WAR_WEARINESS', 'Overall', 1) ;
 
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, RunOnce, Permanent) VALUES 
-                      ('OP_ARES_FAITH_FROM_CAPTURE', 'MODIFIER_PLAYER_GRANT_YIELD', 1, 1) ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'Amount', 500),
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'Scale', 0),
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'YieldType', 'YIELD_FAITH') ;
-
--- here**************
-
-
-/*
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
-                            ('OP_ARES', 'OP_ARES_FAITH_DISPERSAL') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
-                      ('OP_ARES_FAITH_DISPERSAL', 'MODIFIER_ALL_PLAYERS_ATTACH_MODIFIER', 'PLAYER_HAS_PANTHEON_REQUIREMENTS') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_FAITH_DISPERSAL', 'ModifierId', 'OP_ARES_FAITH_DISPERSAL_MODIFIER') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES 
-                      ('OP_ARES_FAITH_DISPERSAL_MODIFIER', 'MODIFIER_PLAYER_ADJUST_FAITH_FROM_DISPERSAL') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_FAITH_DISPERSAL_MODIFIER', 'Amount', 500) ;
-
-
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
-                            ('OP_ARES', 'OP_ARES_ON_CITY_CAPTURE') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType) VALUES 
-                      ('OP_ARES_ON_CITY_CAPTURE', 'MODIFIER_PLAYER_CAPTURED_CITY_ATTACH_MODIFIER') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_ON_CITY_CAPTURE', 'ModifierId', 'OP_ARES_FAITH_FROM_CAPTURE') ;
-
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, RunOnce, Permanent) VALUES 
-                      ('OP_ARES_FAITH_FROM_CAPTURE', 'MODIFIER_PLAYER_GRANT_YIELD', 1, 1) ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'Amount', 500),
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'Scale', 0),
-							  ('OP_ARES_FAITH_FROM_CAPTURE', 'YieldType', 'YIELD_FAITH') ;
-*/
 
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES
                             ('OP_ARES', 'OP_ARES_HOLY_SITE_FAITH_CITY_APPLIES_MODIFIER') ;
@@ -872,18 +862,37 @@ INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
 -- ------------------------------------
 INSERT OR IGNORE INTO Types (Type, Kind) VALUES ('OP_PAN', 'KIND_BELIEF') ; 
 INSERT OR IGNORE INTO Beliefs (BeliefType, Name, Description, BeliefClassType) VALUES ('OP_PAN', 'LOC_OP_PAN', 'LOC_OP_PAN_DESCRIPTION', 'BELIEF_CLASS_PANTHEON') ;
---    2 FOOD on REEDS
-INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
-                            ('OP_PAN', 'OP_PAN_FOOD_CITY_APPLIES_MODIFIER') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
-                      ('OP_PAN_FOOD_CITY_APPLIES_MODIFIER', 'MODIFIER_ALL_CITIES_ATTACH_MODIFIER', 'CITY_FOLLOWS_PANTHEON_REQUIREMENTS') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-                              ('OP_PAN_FOOD_CITY_APPLIES_MODIFIER', 'ModifierId', 'OP_PAN_FOOD_INCREASES_ON_REEDS') ;
-INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
-                      ('OP_PAN_FOOD_INCREASES_ON_REEDS', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'PLOT_HAS_REEDS_REQUIREMENTS') ;
-INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
-							  ('OP_PAN_FOOD_INCREASES_ON_REEDS', 'YieldType', 'YIELD_FOOD'),
-							  ('OP_PAN_FOOD_INCREASES_ON_REEDS', 'Amount', 2) ;
+
+INSERT OR IGNORE INTO Requirements
+(RequirementId,							RequirementType,							Inverse) 
+VALUES
+('OP_REQ_HAS_FLOODPLAINS_GRASSLAND',	'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES',	0),
+('OP_REQ_HAS_FLOODPLAINS_PLAINS',		'REQUIREMENT_PLOT_FEATURE_TYPE_MATCHES',	0)
+;
+
+INSERT OR IGNORE INTO RequirementArguments
+(RequirementId,							Name,			Value) 
+VALUES
+('OP_REQ_HAS_FLOODPLAINS_GRASSLAND',	'FeatureType',	'FEATURE_FLOODPLAINS_GRASSLAND'),
+('OP_REQ_HAS_FLOODPLAINS_PLAINS',		'FeatureType',	'FEATURE_FLOODPLAINS_PLAINS')
+;
+
+INSERT OR IGNORE INTO RequirementSets
+(RequirementSetId,		RequirementSetType)
+VALUES
+('OP_REQSET_PAN_PLOTS',	'REQUIREMENTSET_TEST_ANY')
+;
+
+INSERT OR IGNORE INTO RequirementSetRequirements
+(RequirementSetId,		RequirementId)
+VALUES
+('OP_REQSET_PAN_PLOTS',	'REQUIRES_PLOT_HAS_MARSH'),
+('OP_REQSET_PAN_PLOTS',	'REQUIRES_PLOT_HAS_OASIS'),
+('OP_REQSET_PAN_PLOTS',	'REQUIRES_PLOT_HAS_FLOODPLAINS'),
+('OP_REQSET_PAN_PLOTS',	'OP_REQ_HAS_FLOODPLAINS_GRASSLAND'),
+('OP_REQSET_PAN_PLOTS',	'OP_REQ_HAS_FLOODPLAINS_PLAINS')
+;
+
 --    2 CULTURE on REEDS
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_PAN', 'OP_PAN_CULTURE_CITY_APPLIES_MODIFIER') ;
@@ -892,7 +901,7 @@ INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSet
 INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
                               ('OP_PAN_CULTURE_CITY_APPLIES_MODIFIER', 'ModifierId', 'OP_PAN_CULTURE_INCREASES_ON_REEDS') ;
 INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
-                      ('OP_PAN_CULTURE_INCREASES_ON_REEDS', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'PLOT_HAS_REEDS_REQUIREMENTS') ;
+                      ('OP_PAN_CULTURE_INCREASES_ON_REEDS', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'OP_REQSET_PAN_PLOTS') ;
 INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
 							  ('OP_PAN_CULTURE_INCREASES_ON_REEDS', 'YieldType', 'YIELD_CULTURE'),
 							  ('OP_PAN_CULTURE_INCREASES_ON_REEDS', 'Amount', 2) ;
@@ -906,7 +915,7 @@ INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
 							 ('OP_PAN_MARSH_HOLY_SITE_ADJACENCY', 'Description', 'LOC_OP_DISTRICT_REEDS_FAITH'),
 							 ('OP_PAN_MARSH_HOLY_SITE_ADJACENCY', 'FeatureType', 'FEATURE_MARSH'),
 							 ('OP_PAN_MARSH_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
-                             ('OP_PAN_MARSH_HOLY_SITE_ADJACENCY', 'Amount', 3) ;
+                             ('OP_PAN_MARSH_HOLY_SITE_ADJACENCY', 'Amount', 2) ;
 --    Holy Site Adjacency  //  FAITH for adjacent OASIS
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_PAN', 'OP_PAN_OASIS_HOLY_SITE_ADJACENCY') ;
@@ -917,7 +926,7 @@ INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
 							 ('OP_PAN_OASIS_HOLY_SITE_ADJACENCY', 'Description', 'LOC_OP_DISTRICT_REEDS_FAITH'),
 							 ('OP_PAN_OASIS_HOLY_SITE_ADJACENCY', 'FeatureType', 'FEATURE_OASIS'),
 							 ('OP_PAN_OASIS_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
-                             ('OP_PAN_OASIS_HOLY_SITE_ADJACENCY', 'Amount', 3) ;
+                             ('OP_PAN_OASIS_HOLY_SITE_ADJACENCY', 'Amount', 2) ;
 --    Holy Site Adjacency  //  FAITH for adjacent FLOODPLAINS
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_PAN', 'OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY') ;
@@ -928,7 +937,29 @@ INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
 							 ('OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY', 'Description', 'LOC_OP_DISTRICT_REEDS_FAITH'),
 							 ('OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY', 'FeatureType', 'FEATURE_FLOODPLAINS'),
 							 ('OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
-                             ('OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY', 'Amount', 3) ;
+                             ('OP_PAN_FLOODPLAINS_HOLY_SITE_ADJACENCY', 'Amount', 2) ;
+--    Holy Site Adjacency  //  FAITH for adjacent FLOODPLAINS_GRASSLAND
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
+                            ('OP_PAN', 'OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY') ;
+INSERT OR IGNORE INTO Modifiers(ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
+                     ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'MODIFIER_ALL_CITIES_FEATURE_ADJACENCY', 'CITY_FOLLOWS_PANTHEON_REQUIREMENTS') ;
+INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
+							 ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'DistrictType', 'DISTRICT_HOLY_SITE'),
+							 ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'Description', 'LOC_OP_DISTRICT_REEDS_FAITH'),
+							 ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'FeatureType', 'FEATURE_FLOODPLAINS_GRASSLAND'),
+							 ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
+                             ('OP_PAN_FLOODPLAINS_GRASSLAND_HOLY_SITE_ADJACENCY', 'Amount', 2) ;
+--    Holy Site Adjacency  //  FAITH for adjacent FLOODPLAINS_PLAINS
+INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
+                            ('OP_PAN', 'OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY') ;
+INSERT OR IGNORE INTO Modifiers(ModifierId, ModifierType, SubjectRequirementSetId) VALUES 
+                     ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'MODIFIER_ALL_CITIES_FEATURE_ADJACENCY', 'CITY_FOLLOWS_PANTHEON_REQUIREMENTS') ;
+INSERT OR IGNORE INTO ModifierArguments(ModifierId, Name, Value) VALUES
+							 ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'DistrictType', 'DISTRICT_HOLY_SITE'),
+							 ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'Description', 'LOC_OP_DISTRICT_REEDS_FAITH'),
+							 ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'FeatureType', 'FEATURE_FLOODPLAINS_PLAINS'),
+							 ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'YieldType', 'YIELD_FAITH'),
+                             ('OP_PAN_FLOODPLAINS_PLAINS_HOLY_SITE_ADJACENCY', 'Amount', 2) ;
 
 
 -- ------------------------------------
