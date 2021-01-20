@@ -381,7 +381,7 @@ INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSet
                       ('OP_DEMETER_FOOD_INCREASES_ON_FARM', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'PLOT_HAS_FARM_REQUIREMENTS') ;
 INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
 							  ('OP_DEMETER_FOOD_INCREASES_ON_FARM', 'YieldType', 'YIELD_FOOD'),
-							  ('OP_DEMETER_FOOD_INCREASES_ON_FARM', 'Amount', 2) ;
+							  ('OP_DEMETER_FOOD_INCREASES_ON_FARM', 'Amount', 1) ;
 --    1 FOOD on TERRACE_FARM
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_DEMETER', 'OP_DEMETER_FOOD_TERRACE_CITY_APPLIES_MODIFIER') ;
@@ -393,7 +393,7 @@ INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSet
                       ('OP_DEMETER_FOOD_INCREASES_ON_TERRACE_FARM', 'MODIFIER_CITY_PLOT_YIELDS_ADJUST_PLOT_YIELD', 'DB_REQSET_HAS_TERRACE_FARM') ;
 INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES
 							  ('OP_DEMETER_FOOD_INCREASES_ON_TERRACE_FARM', 'YieldType', 'YIELD_FOOD'),
-							  ('OP_DEMETER_FOOD_INCREASES_ON_TERRACE_FARM', 'Amount', 2) ;
+							  ('OP_DEMETER_FOOD_INCREASES_ON_TERRACE_FARM', 'Amount', 1) ;
 --    Reverse Holy Site Adjacency  //  FAITH on FARM adjacent to Holy Site
 INSERT OR IGNORE INTO BeliefModifiers (BeliefType, ModifierID) VALUES 
                             ('OP_DEMETER', 'OP_DEMETER_CITY_APPLIES_MODIFIER_FAITH_FARM_ADJACENCY_REVERSE') ;
@@ -764,17 +764,17 @@ INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, SubjectRequirementSet
                       ('OP_HERA_HOLY_SITE_GOVERNOR5', 'DB_DM_ADJUST_DISTRICT_YIELD', 'DISTRICT_IS_HOLY_SITE'),
                       ('OP_HERA_HOLY_SITE_GOVERNOR6', 'DB_DM_ADJUST_DISTRICT_YIELD', 'DISTRICT_IS_HOLY_SITE') ;
 INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Value) VALUES 
-							  ('OP_HERA_HOLY_SITE_GOVERNOR1', 'Amount', 1),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR1', 'Amount', 3),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR1', 'YieldType', 'YIELD_FAITH'),
-							  ('OP_HERA_HOLY_SITE_GOVERNOR2', 'Amount', 2),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR2', 'Amount', 7),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR2', 'YieldType', 'YIELD_FAITH'),
-							  ('OP_HERA_HOLY_SITE_GOVERNOR3', 'Amount', 3),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR3', 'Amount', 12),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR3', 'YieldType', 'YIELD_FAITH'),
-							  ('OP_HERA_HOLY_SITE_GOVERNOR4', 'Amount', 4),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR4', 'Amount', 18),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR4', 'YieldType', 'YIELD_FAITH'),
-							  ('OP_HERA_HOLY_SITE_GOVERNOR5', 'Amount', 5),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR5', 'Amount', 25),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR5', 'YieldType', 'YIELD_FAITH'),
-							  ('OP_HERA_HOLY_SITE_GOVERNOR6', 'Amount', 6),
+							  ('OP_HERA_HOLY_SITE_GOVERNOR6', 'Amount', 33),
 							  ('OP_HERA_HOLY_SITE_GOVERNOR6', 'YieldType', 'YIELD_FAITH') ;
 
 -- ------------------------------------

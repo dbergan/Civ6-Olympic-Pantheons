@@ -46,7 +46,7 @@ INSERT OR REPLACE INTO LocalizedText
 ('LOC_PEDIA_RELIGIONS_PAGE_OP_ATLAS_CHAPTER_HISTORY_PARA_1', 'Atlas was a Titan condemned to hold up the sky for eternity. Although associated with various places, he became commonly identified with the Atlas Mountains in northwest Africa (modern-day Morocco, Algeria and Tunisia). Atlas was the son of the Titan Iapetus and the Oceanid Asia or Clymene. He had many children, mostly daughters, the Hesperides, the Hyades, the Pleiades, and the nymph Calypso who lived on the island Ogygia. Atlas stood at the ends of the earth towards the west.  ''Atlantic Ocean'' means ''Sea of Atlas'', while ''Atlantis'' means ''island of Atlas''.', 'en_US'),
 
 ('LOC_OP_DEMETER', 'Demeter', 'en_US'),
-('LOC_OP_DEMETER_DESCRIPTION', 'Farms --> [ICON_Food][ICON_Food][NEWLINE](+2 Food from Farms, including Terrace Farms)[NEWLINE]Farms get +3 [ICON_Faith] Faith when next to a Holy Site', 'en_US'),
+('LOC_OP_DEMETER_DESCRIPTION', 'Farms --> [ICON_Food][NEWLINE](+1 Food from Farms, including Terrace Farms)[NEWLINE]Farms get +3 [ICON_Faith] Faith when next to a Holy Site', 'en_US'),
 ('LOC_PEDIA_RELIGIONS_PAGE_OP_DEMETER_CHAPTER_HISTORY_PARA_1', 'Demeter is the goddess of the grain, agriculture, harvest, growth, and nourishment, who presided over grains and the fertility of the earth. Though Demeter is often described simply as the goddess of the harvest, she presided also over the sacred law, and the cycle of life and death.', 'en_US'),
 
 ('LOC_OP_DIONYSUS', 'Dionysus', 'en_US'),
@@ -72,7 +72,7 @@ INSERT OR REPLACE INTO LocalizedText
 ('LOC_PEDIA_RELIGIONS_PAGE_OP_HEPHAESTUS_CHAPTER_HISTORY_PARA_1', 'Hephaestus is the Greek god of blacksmiths, metalworking, carpenters, craftsmen, artisans, sculptors, metallurgy, fire, and volcanoes. Hephaestus was either the son of Zeus and Hera or he was Hera''s parthenogenous child, rejected by his mother because of his deformity and thrown off Mount Olympus and down to earth.[NEWLINE][NEWLINE]As a smithing god, Hephaestus made all the weapons of the gods in Olympus. He served as the blacksmith of the gods, and was worshipped in the manufacturing and industrial centers of Greece, particularly Athens.', 'en_US'),
 
 ('LOC_OP_HERA', 'Hera', 'en_US'),
-('LOC_OP_HERA_DESCRIPTION', 'Always loyal[NEWLINE](Your cities are immune to loyalty pressure)[NEWLINE]Holy Sites receive +1/3/6/10/15/21 [ICON_Faith] Faith based on the number of governor titles the city''s governor has', 'en_US'),
+('LOC_OP_HERA_DESCRIPTION', 'Always loyal[NEWLINE](Your cities are immune to loyalty pressure)[NEWLINE]Holy Sites receive +3/7/12/18/25/33 [ICON_Faith] Faith based on the number of governor titles the city''s governor has', 'en_US'),
 ('LOC_PEDIA_RELIGIONS_PAGE_OP_HERA_CHAPTER_HISTORY_PARA_1', 'Hera is the goddess of women, marriage, family, and childbirth, one of the Twelve Olympians and the sister-wife of Zeus. She is the daughter of the Titans Cronus and Rhea. Hera rules over Mount Olympus as queen of the gods. A matronly figure, Hera served as both the patroness and protectress of married women, presiding over weddings and blessing marital unions. One of Hera''s defining characteristics is her jealous and vengeful nature against Zeus'' numerous lovers and illegitimate offspring, as well as the mortals who cross her. Yet she never leaves Zeus...', 'en_US'),
 
 ('LOC_OP_HERMES', 'Hermes', 'en_US'),
